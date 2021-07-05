@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    
+    <div id="root"></div>
+    <script type="text/babel">
+    class Name extends React.Component{
+        render(){
+            return(
+                <div>
+                    {this.props.value}
+                </div>
+            )
+        }
+    }
+    class App extends React.Component{
+        constructor(props){
+            super(props)
+            this.state = {
+                name:'ingoo'
+            }
+        }
+        render(){
+            return(
+                <div>
+                    {this.state.name} <Name value={this.state.name} />
+                </div>
+            )
+            // props는 컴포넌트를 사용할때 지정이 가능합니다
+            // XML이나 HTML형태로 봤을때 속성값에 변수명을 지정할 수 있습니다
+            // <Element Attribute="value"/>
+            // <nam,>
+        }
+    }
+
+    ReactDOM.render(
+        <App/>,
+        document.querySelector('#root')
+    )
+    </script>
+
+</body>
+</html>

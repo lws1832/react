@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="./리액트6.css">
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+    // function App(){ 오타를 줄일수 있다. 대신 render 존재하지않아 왜 헷갈릴수잇다.
+    //     return(
+    //         <p>안녕</p>
+    //     )
+    // }
+
+class App extends React.Component{
+    render(){
+        return(
+            <p>kughjk</p> 
+        )
+    }
+}
+ReactDOM.render(
+    <App/>,
+    document.querySelector('#root')
+)
+    </script>
+</body>
+</html>

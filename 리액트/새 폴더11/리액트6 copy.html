@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="./react_example/example6.css">
+</head>
+<body>
+ 
+    <div id="root">
+    </div>
+<!-- 자바스크립트 html을 따로 안쓰고 리액트로 쓰는 이유는
+자바스크립트는 일일이 속성값을 줘야한다??조금 번잡하다
+리액트는
+-->
+     <!-- d\위의 html 을 기본 틀로 생각하며 리액트로 만들어보기 -->
+<script type="text/babel">
+    class ComponentComment extends React.Component{
+    
+        render(){
+            return(
+                <ul className="comment">
+                    <li>
+                        <ul className="comment-row">
+                            <li className="comment-id">web7722</li>
+                            <li className="comment-content">안녕하세요</li>
+                           
+                            <li className="comment-date">2021-06-28</li>
+                        </ul>
+                    </li>
+                   
+                </ul>
+                )
+            }
+        }
+    
+
+        class ComponentForm extends React.Component{
+        render(){
+            return(
+                    <li className="comment-form">
+                        <form onSubmit={this.props.onSubmit}>
+                            <h4> 댓글쓰기 <span>({this.props.length})</span> </h4>
+                            <span className="ps_box">
+                                <input type="text" name="top" placeholder="댓글내용을 입력해주세요." 
+                                className="int"/>
+                            </span>
+                            <input type="submit" value="등록" className="btn"/>
+                        </form>
+                  {this.props.top}
+                    </li>
+                    )
+                }
+            }
+    class ComponentRow extends React.Component{
+        constructor(props){
+            super(props)
+        }
+        render(){
+            return(
+                <li>
+                    <ul className="comment-row">
+                        <li className="comment-id">{this.props.userid}</li>
+                        <li className="comment-content">{this.props.content}</li>
+                        <li className="comment-date">{this.props.data}</li>
+                    </ul>    
+                </li>
+            )
+        }
+    }
+
+    class CommentApp extends React.Component{
+        constructor(props){
+            super(props)
+            this.state ={
+                comments:[
+                    {userid:'awe',content:'123',data:'2021'},
+                    {userid:'awe',content:'123',data:'2021'},
+                    {userid:'awe',content:'123',data:'2021'},
+                ]
+            }
+        }
+     
+        onSubmit =(e)=>{ //e 이벤트가 발생한 DOM
+            e.preventDefault() //기존 이벤트를 막는거 자주씀 외워라
+            let input =e.target.querySelector('.int').value
+            let obj = {userid:'awe',content:'123',data:'2021'}
+            // this.state.comments.push(obj)
+            let {comments}={...this.state}
+            comments.push(obj)
+            this.setState({
+               comments:comments
+            })
+            e.target.reset()
+        }
+        renderRow  () {
+            let {comments} = {...this.state}
+            return(
+                comments.map( (value,key)=>{
+                    return(
+                        <ComponentRow 
+                        key={key}
+                        userid = {value.userid}
+                        content={value.content}
+                        data={value.date}
+                        />
+                    )
+                })
+            )
+        }
+    
+            render(){
+                return(
+                    <>
+                    <ComponentComment/>
+                    <ComponentComment/>
+                    <ComponentComment/>
+                    <ComponentForm onSubmit={this.onSubmit} top={this.state.top}  />
+                  
+                    </>
+                )
+            }
+            render(){
+                return(
+                    <ul className="comment-form"></ul>
+                )
+            }
+        }
+      
+    ReactDOM.render(
+        <CommentApp/>,
+        document.querySelector('#root')
+    )
+    </script>
+</body>
+</html>

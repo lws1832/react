@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+    // 컴포넌트 만들때 첫글자는 항상 대문자여야한다.
+
+    class Hello extends React.Component{
+        render(){
+            return(
+              //빈태그도 넣을 수 있다.   
+              <> 
+                Hello
+                </>
+            )
+        }
+    }
+
+    class World extends React.Component{
+        render(){
+            return(
+                <>
+                    World
+                </>
+            )
+        }
+    }
+    class App extends React.Component{
+        render(){
+            const ele = <h1>안녕하세여</h1>
+            return(
+                <>
+                ele
+                { ele } 
+                <Hello/> <World/>
+                </>
+            )
+        }
+    }
+    ReactDOM.render(
+        <App/>,
+        document.querySelector('#root')
+    )
+    </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="./리액트6.css">
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+    // 함수와 클래스 쓰는법 차이점
+
+        function App(){
+            let [text,setText] = React.useState('asdad') //비구조할당문사용
+            let [text2,setText2] = React.useState('asdad123123')
+            let [text3,setText3] = React.useState('asdad*&&%^^^')
+            let [list,setList] = React.useState([1,2,3,4,5])
+
+            const handleClick = e =>{
+                setText('바꿈')
+                setText2('바꿈123')
+                setText3('바꿈!@#')
+            }
+
+            return(
+                <>
+            <p onClick={handleClick}>{text}</p>
+            <p>{text2}</p>
+            <p>{text3}</p>
+            <p>{list.map(v=>v+1)}</p>
+
+                </>
+            )
+        }
+
+
+
+//     class App extends React.Component{
+//         constructor(props){
+//             super(props)
+//             this.state = {
+//                 text : 'abc hi',
+//                 text2:'adad',
+//                 text3:'qwrqwr'
+//             }
+//         }
+//     render(){
+//         return(
+//             <>
+//             <p>{this.state.text}</p> 
+//             <p>{this.state.text2}</p> 
+//             <p>{this.state.text3}</p> 
+//             </>
+//         )
+//     }
+// }
+
+    ReactDOM.render(
+    <App/>,
+    document.querySelector('#root')
+)
+    </script>
+</body>
+</html>

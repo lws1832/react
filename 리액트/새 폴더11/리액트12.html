@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="./op.css">
+
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+    
+    class Header extends React.Component{
+        render(){
+            return(
+                <div className="header">
+                    {this.props.children}
+                </div>
+            )
+        }
+    }
+    class Logo extends React.Component{
+        render(){
+            return(
+                <h1 id="logo" >Logo</h1>
+            )
+        }
+    
+    }
+    class Menu extends React.Component{
+        render(){
+            return(
+                <ul id="">
+                    <li>123</li>
+                    <li>234</li>
+                    <li>234</li>
+                    <li>4aw</li>
+                </ul>
+            )
+        }
+        
+    }
+    class Utill extends React.Component{
+        login = ()=>{
+            return(
+                <>
+                <li>누구요?</li>
+                <li>절친할래?</li>
+                </>
+            )
+        }
+        logout =()=>{
+            return(
+                <>
+                <li onclick={this.props.onDelete}>나갈래</li>
+                <li>누구요?</li>
+                </>
+        
+            )
+        }
+        render(){
+            return(
+                <ul>
+                    {this.props.isLogin?this.logout():this.login()}
+                </ul>
+            )
+        }
+    }
+    class LoginBox extends React.Component{
+        state ={
+            userid:'',
+            userpw:''
+        }
+        handleChange =(e)=>{
+            this.setState({[e.target.name]:e.target.value})
+            // [e.target.name]-> 선택한 녀석의 이름을 가져온다 input naem="userid"
+        }
+        handleSubmit=(e)=>{
+            e.preventDefault()
+            this.props.onCreate(this.state) //선택값을 넘겨주고 리셋시킨다.
+            this.setState({
+                userid:'',
+                userpw:'',
+            })
+        }
+        render(){
+            return(
+                <form onSubmit={this.handleSubmit}>
+                    <input 
+                    type="text"
+                    placeholder="아디입력요망"
+                    value={this.state.userid}
+                    onChange={this.handleChange}
+                    name="userid"
+                    />
+                    <input 
+                    type="password"
+                    placeholder="비번입력요망"
+                    value={this.state.userpw}
+                    onChange={this.handleChange}
+                    name="userpw"
+                    />
+                    <button type="submit">로그인</button>
+                </form>
+            )
+        }
+    }
+    // logininfo
+    // id : admin pw : admin
+    // isLogin:true
+    class App extends React.Component{
+        state ={
+            isLogin:false,
+        }
+       
+        handleCreate = (data)=>{
+            let {userid,userpw} = data
+            if(userid ==='12' && userpw ==='12'){
+                this.setState({isLogin:true})
+            }
+        }
+        
+        handleDelete =()=>{
+            this.setState({isLogin:false})
+        }
+        render(){
+            return(
+                <>
+                <Header>
+                    <Logo/>
+                    <Menu/>
+                    <Utill isLogin = {this.state.isLogin} onDelete = {this.handleDelete}/>
+                </Header>
+                {this.state.isLogin ? '' : <LoginBox onCreate = {this.handleCreate}/>}
+                </>
+                
+            )
+        }
+    }
+    ReactDOM.render(
+        <App/>,
+        document.querySelector('#root')
+    )
+    </script>
+</body>
+</html>
