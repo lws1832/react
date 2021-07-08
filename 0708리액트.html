@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+    class App extends React.Component{
+        state = {
+            loginTxt:'login'
+        }
+        render(){
+            return(
+                <> {/*<<넌작스 구문안에 만들때는 {}를 써야한다 안쓰면 그냥 텍스트 그대로 출력*/}
+               
+                {React.createElement(LoginBox)}
+                {/* babel이 밑에 구문을 읽고 위에처럼 실행시켜준다. */}
+                <LoginBox onClick={this.state.loginTxt}/>
+                {/* 위에 구문 jsx 영역 자바스크립트에서 사용할려면 {}
+                */}
+                
+                </>
+            )
+        }
+    }
+
+    class LoginBox extends React.Component{
+        render(){
+            return(
+                <>
+                
+                <Login onClick={this.props.onClick}/>
+                </>
+            )
+        }
+    }
+    class Login extends React.Component{
+        onClickHandle =(data)=>{
+            console.log(this.props.onClick,data)
+        }
+        render(){
+            return(
+                <>
+                
+                <button onClick={this.onClickHandle('ㅀㅇㅀ')}>
+                    {/**/}
+                    {this.props.onClick}
+                </button>
+                </>
+            )
+        }
+    }
+    // 처음 함수를 
+
+    // 내가 컴포넌트에 썻는가 
+    // 함수는 () 리턴값이 없는경우 언디파인드를 출력한다.
+    // 함수명만 사용하면 함수안에 내용이 출력만 할뿐 실행은 안한다.
+    // 함수명() 안에 내용을 실행 시켰다
+    // 익명함수는 
+     
+
+   
+    ReactDOM.render( //다시 그려준다 
+        <App/>,
+        document.querySelector('#root')
+    )
+    </script>
+</body>
+</html>
